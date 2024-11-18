@@ -5,6 +5,7 @@ const showResult = "Showing 01 - 12 of 139 Results"
 import Data from "../../products.json";
 import ProductsCards from './ProductsCards';
 import Pagination from './Pagination';
+import ShopCategory from './ShopCategory';
 
 const Shop = () => {
     const [GridList, setGridList] = useState(true);
@@ -21,6 +22,17 @@ const Shop = () => {
     // function to change the current-page
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber)
+    };
+    // filter-product based on category
+    const [selectCategory, setSelectCategory] = useState('All');
+    const menuItems = [...new Set(Data.map((val) => val.category))];
+
+    const filterItem = (curCat) => {
+      const newItem = Data.filter((newVal) => {
+        return newVal.category === curCat;
+      })
+      setSelectCategory(curCat);
+      setProducts(newItem);
     }
   return (
     <div>
@@ -56,7 +68,16 @@ const Shop = () => {
                     </article>
                 </div>
                 <div className="col-lg-4 col-12">
-                    right-side
+                   <aside>
+                      <Search products={products} GridList={GridList}/>
+                      <ShopCategory  
+                        filterItem={filterItem}
+                        setItem={setProducts}
+                        menuItems={menuItems}
+                        setProducts={setProducts}
+                        selectCategory={selectCategory}
+                      />
+                   </aside>
                 </div>
             </div>
         </div>
