@@ -6,6 +6,8 @@ import Data from "../../products.json";
 import ProductsCards from './ProductsCards';
 import Pagination from './Pagination';
 import ShopCategory from './ShopCategory';
+import PopularPost from './PopularPost';
+import Tags from './Tags';
 
 const Shop = () => {
     const [GridList, setGridList] = useState(true);
@@ -77,6 +79,8 @@ const Shop = () => {
                         setProducts={setProducts}
                         selectCategory={selectCategory}
                       />
+                      <PopularPost/>
+                      <Tags/>
                    </aside>
                 </div>
             </div>
